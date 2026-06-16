@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="theme-color" content="#1F3864" />
+<title>Avaliação Fisioterapêutica - Santa Casa SP</title>
+<style>
+  :root {
+    --primary: #1F3864;
+    --primary-light: #D9E2F3;
+    --bg: #F4F6FA;
+    --surface: #FFFFFF;
+    --border: #D7DCE5;
+    --text: #1A1A1A;
+    --text-secondary: #5F6672;
+    --text-tertiary: #8A909B;
+    --danger: #B3261E;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  #app {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 16px;
+    padding-bottom: 80px;
+  }
+
+  h1, h2, h3 { font-weight: 600; line-height: 1.3; margin: 0; }
+  h1 { font-size: 18px; }
+  h2 { font-size: 17px; }
+  h3 { font-size: 15px; color: var(--primary); }
+
+  p { margin: 0; line-height: 1.5; }
+
+  /* TOP BAR */
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .topbar .brand-text { min-width: 0; }
+  .topbar .brand-text p { font-size: 11px; color: var(--text-tertiary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .logo-circle {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--primary-light);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-weight: 700; color: var(--primary); font-size: 16px;
+  }
+
+  .user-chip {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--text-secondary);
+    flex-shrink: 0;
+  }
+
+  /* BUTTONS */
+  button, .btn {
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px 14px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    -webkit-appearance: none;
+  }
+  button:active { transform: scale(0.98); }
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    font-weight: 600;
+  }
+  .btn-danger { color: var(--danger); }
+  .btn-text {
+    background: transparent;
+    border: none;
+    padding: 6px 0;
+    color: var(--text-secondary);
+    font-size: 13px;
+  }
+  .btn-block { width: 100%; }
+  .btn-sm { font-size: 13px; padding: 6px 10px; }
+  .btn-icon { padding: 6px 10px; }
+
+  /* CARDS / SECTIONS */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .card h3 { margin-bottom: 4px; }
+  .card .subtitle { font-size: 12px; color: var(--text-tertiary); margin-bottom: 10px; }
+
+  /* FORM ELEMENTS */
+  label.field-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+  }
+  .field { margin-bottom: 12px; }
+  input[type=text], input[type=tel], input[type=date], input[type=search],
+  textarea, select {
+    width: 100%;
+    font-family: inherit;
+    font-size: 15px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: #fff;
+    color: var(--text);
+    -webkit-appearance: none;
+  }
+  textarea { resize: vertical; min-height: 60px; }
+  input[type=range] { width: 100%; }
+  .row { display: flex; gap: 10px; }
+  .row > * { flex: 1; min-width: 0; }
+  .checkbox-grid { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 4px; }
+  .checkbox-grid label { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 400; color: var(--text); }
+
+  /* PATIENT LIST */
+  .patient-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    width: 100%; text-align: left;
+    padding: 12px 14px; margin-bottom: 8px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  }
+  .patient-item .avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--bg); display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600; color: var(--text-secondary); flex-shrink: 0;
+  }
+  .patient-item .info { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .patient-item .meta p:first-child { font-size: 14px; font-weight: 600; }
+  .patient-item .meta p:last-child { font-size: 12px; color: var(--text-tertiary); }
+  .patient-item .right { font-size: 12px; color: var(--text-tertiary); text-align: right; flex-shrink: 0; white-space: nowrap; }
+
+  .assessment-item {
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    padding: 12px 14px; margin-bottom: 8px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  }
+  .assessment-item .meta p:first-child { font-size: 14px; font-weight: 600; }
+  .assessment-item .meta p:last-child { font-size: 12px; color: var(--text-tertiary); margin-top: 2px; }
+
+  .empty-state { text-align: center; padding: 32px 16px; color: var(--text-tertiary); }
+  .empty-state p { font-size: 14px; margin-top: 6px; }
+
+  /* TABLE (ROM) */
+  table.rom { width: 100%; font-size: 13px; border-collapse: collapse; }
+  table.rom th { text-align: left; padding: 6px 6px; font-weight: 600; background: var(--bg); }
+  table.rom td { padding: 4px 6px; border-top: 1px solid var(--border); }
+  table.rom input { font-size: 13px; padding: 6px 8px; }
+
+  /* AUTH SCREEN */
+  .auth-wrap { max-width: 360px; margin: 40px auto 0; }
+  .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+  .tabs button { flex: 1; }
+  .tab-active { background: var(--primary-light); border-color: var(--primary-light); font-weight: 600; color: var(--primary); }
+
+  .error-banner {
+    background: #FBEAEA; color: var(--danger);
+    padding: 10px 12px; border-radius: var(--radius-md);
+    font-size: 13px; margin-bottom: 12px;
+  }
+  .toast {
+    position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%);
+    background: var(--text); color: #fff; padding: 10px 18px;
+    border-radius: var(--radius-md); font-size: 13px; z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+
+  .footer-actions {
+    display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px;
+  }
+
+  .eva-scale {
+    display: flex; justify-content: space-between; font-size: 12px; color: var(--text-tertiary);
+    margin-top: 4px;
+  }
+
+  .loading-state {
+    text-align: center; padding: 60px 16px; color: var(--text-secondary);
+  }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div class="loading-state" id="loading">
+    <p>Carregando dados da clínica...</p>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   CONFIGURAÇÃO
+   ========================================================= */
+
+// Cole aqui a URL do seu "App da Web" do Google Apps Script
+// (terminando em /exec). Veja o GUIA.md para instruções.
+const API_URL = "https://script.google.com/macros/s/AKfycbycR__AwD4Yb-gLM95NK8MkVJhK-hiI64HltNia5IR9b2GDCcBgJKemMSYwRSbzjlJv/exec";
+
+const ROM_MOVEMENTS = [
+  "Quadril - Flexão",
+  "Quadril - Extensão",
+  "Quadril - Abdução",
+  "Quadril - Adução",
+  "Quadril - Rotação interna",
+  "Quadril - Rotação externa",
+  "Joelho - Flexão",
+  "Joelho - Extensão",
+  "Tornozelo - Flexão plantar",
+  "Tornozelo - Dorsiflexão",
+  "Tornozelo - Inversão",
+  "Tornozelo - Eversão",
+];
+
+const PAIN_TYPES = ["Em pontada", "Em queimação", "Em peso", "Latejante", "Formigamento", "Outro"];
+
+function emptyAssessment() {
+  return {
+    data: new Date().toISOString().slice(0, 10),
+    avaliador: "",
+    queixaPrincipal: "",
+    inicioSintomas: "",
+    evolucaoQuadro: "",
+    tratamentosAnteriores: "",
+    hipoteseDiagnostica: "",
+    historicoMedico: "",
+    habitosVida: "",
+    evaNivel: 0,
+    localizacaoDor: "",
+    tipoDor: [],
+    tipoDorOutro: "",
+    fatoresMelhora: "",
+    fatoresPiora: "",
+    frequenciaDor: "",
+    posturaEstatica: "",
+    alteracoesVisiveis: "",
+    palpacao: "",
+    cicatrizes: "",
+    rom: {},
+    testesEspeciais: "",
+    marcha: "",
+    equilibrio: "",
+    transferencias: "",
+    sensibilidade: "",
+    atividadesComprometidas: "",
+    nivelIndependencia: "",
+    objetivosPaciente: "",
+    diagnosticoFisio: "",
+    objetivosTratamento: "",
+    condutaProposta: "",
+    frequenciaSessoes: "",
+    reavaliacaoPara: "",
+    fisioterapeutaResponsavel: "",
+  };
+}
+
+/* =========================================================
+   ESTADO GLOBAL
+   ========================================================= */
+
+const state = {
+  loading: true,
+  error: null,
+  therapists: [],
+  patients: [],
+  assessments: {}, // { pacienteId: [ {id, pacienteId, dados, criadoEm, atualizadoEm}, ... ] }
+  currentUser: null, // { id, nome, crefito }
+  authMode: "login",
+  view: "patients", // patients | patient-detail | assessment-form
+  selectedPatientId: null,
+  editingAssessment: null, // { id|null, pacienteId, dados }
+  searchTerm: "",
+  saveStatus: "",
+};
+
+/* =========================================================
+   API HELPERS
+   ========================================================= */
+
+async function apiGet(params) {
+  const url = API_URL + "?" + new URLSearchParams(params).toString();
+  const res = await fetch(url);
+  const json = await res.json();
+  if (!json.ok) throw new Error(json.error || "Erro desconhecido");
+  return json.data;
+}
+
+async function apiPost(action, payload) {
+  const res = await fetch(API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({ action, payload }),
+  });
+  const json = await res.json();
+  if (!json.ok) throw new Error(json.error || "Erro desconhecido");
+  return json.data;
+}
+
+/* =========================================================
+   CARREGAMENTO INICIAL
+   ========================================================= */
+
+async function loadAll() {
+  state.loading = true;
+  render();
+  try {
+    const data = await apiGet({ action: "listAll" });
+
+    state.therapists = (data.fisioterapeutas || []).map((t) => ({
+      id: t.id, nome: t.nome, crefito: t.crefito,
+    }));
+
+    state.patients = (data.pacientes || []).map((p) => ({
+      id: p.id, nome: p.nome, nascimento: p.nascimento, telefone: p.telefone, criadoEm: p.criadoEm,
+    }));
+
+    const assessmentsByPatient = {};
+    (data.avaliacoes || []).forEach((a) => {
+      let dados = {};
+      try { dados = JSON.parse(a.dadosJson || "{}"); } catch (e) { dados = {}; }
+      const entry = { id: a.id, pacienteId: a.pacienteId, dados: dados, criadoEm: a.criadoEm, atualizadoEm: a.atualizadoEm };
+      if (!assessmentsByPatient[a.pacienteId]) assessmentsByPatient[a.pacienteId] = [];
+      assessmentsByPatient[a.pacienteId].push(entry);
+    });
+    Object.keys(assessmentsByPatient).forEach((pid) => {
+      assessmentsByPatient[pid].sort((x, y) => (x.dados.data < y.dados.data ? 1 : -1));
+    });
+    state.assessments = assessmentsByPatient;
+
+    state.error = null;
+  } catch (err) {
+    state.error = "Não foi possível conectar à planilha. Verifique a URL configurada no arquivo (API_URL) e sua conexão com a internet. Detalhe: " + err.message;
+  } finally {
+    state.loading = false;
+    render();
+  }
+}
+
+/* =========================================================
+   AUTENTICAÇÃO
+   ========================================================= */
+
+async function handleAuthSubmit(name, crefito) {
+  name = (name || "").trim();
+  crefito = (crefito || "").trim();
+  if (!name) {
+    showAuthError("Informe seu nome.");
+    return;
+  }
+
+  if (state.authMode === "login") {
+    const found = state.therapists.find((t) => t.nome.toLowerCase() === name.toLowerCase());
+    if (!found) {
+      showAuthError('Profissional não encontrado. Use "Cadastrar" para criar seu acesso.');
+      return;
+    }
+    state.currentUser = found;
+    render();
+  } else {
+    const exists = state.therapists.find((t) => t.nome.toLowerCase() === name.toLowerCase());
+    if (exists) {
+      showAuthError('Já existe um profissional com esse nome. Use "Entrar".');
+      return;
+    }
+    try {
+      const created = await apiPost("addTherapist", { nome: name, crefito: crefito });
+      state.therapists.push(created);
+      state.currentUser = created;
+      render();
+    } catch (err) {
+      showAuthError("Falha ao criar acesso: " + err.message);
+    }
+  }
+}
+
+function showAuthError(msg) {
+  const el = document.getElementById("auth-error");
+  if (el) {
+    el.textContent = msg;
+    el.classList.remove("hidden");
+  }
+}
+
+function handleLogout() {
+  state.currentUser = null;
+  state.view = "patients";
+  state.selectedPatientId = null;
+  state.editingAssessment = null;
+  render();
+}
+
+/* =========================================================
+   PACIENTES
+   ========================================================= */
+
+async function handleAddPatient(nome, nascimento, telefone) {
+  nome = (nome || "").trim();
+  if (!nome) return;
+  try {
+    const created = await apiPost("addPatient", { nome, nascimento: nascimento || "", telefone: (telefone || "").trim() });
+    state.patients.push(created);
+    state.selectedPatientId = created.id;
+    state.view = "patient-detail";
+    render();
+  } catch (err) {
+    showToast("Falha ao cadastrar paciente: " + err.message);
+  }
+}
+
+async function handleDeletePatient(patientId) {
+  try {
+    await apiPost("deletePatient", { id: patientId });
+    state.patients = state.patients.filter((p) => p.id !== patientId);
+    delete state.assessments[patientId];
+    state.selectedPatientId = null;
+    state.view = "patients";
+    render();
+  } catch (err) {
+    showToast("Falha ao excluir paciente: " + err.message);
+  }
+}
+
+/* =========================================================
+   AVALIAÇÕES
+   ========================================================= */
+
+function startNewAssessment(patientId) {
+  const dados = emptyAssessment();
+  dados.avaliador = state.currentUser ? state.currentUser.nome : "";
+  dados.fisioterapeutaResponsavel = state.currentUser ? state.currentUser.nome : "";
+  state.editingAssessment = { id: null, pacienteId: patientId, dados: dados };
+  state.view = "assessment-form";
+  render();
+}
+
+function startEditAssessment(patientId, assessment) {
+  const dados = Object.assign(emptyAssessment(), assessment.dados);
+  state.editingAssessment = { id: assessment.id, pacienteId: patientId, dados: dados };
+  state.view = "assessment-form";
+  render();
+}
+
+async function handleSaveAssessment() {
+  const ea = state.editingAssessment;
+  if (!ea) return;
+  state.saveStatus = "saving";
+  render();
+  try {
+    const saved = await apiPost("saveAssessment", { id: ea.id, pacienteId: ea.pacienteId, dados: ea.dados });
+    const entry = { id: saved.id, pacienteId: ea.pacienteId, dados: ea.dados, criadoEm: saved.criadoEm || saved.atualizadoEm, atualizadoEm: saved.atualizadoEm };
+    const list = state.assessments[ea.pacienteId] || [];
+    const filtered = list.filter((a) => a.id !== entry.id);
+    const next = [entry, ...filtered].sort((x, y) => (x.dados.data < y.dados.data ? 1 : -1));
+    state.assessments[ea.pacienteId] = next;
+    state.saveStatus = "";
+    state.view = "patient-detail";
+    state.editingAssessment = null;
+    render();
+    showToast("Avaliação salva com sucesso.");
+  } catch (err) {
+    state.saveStatus = "error";
+    render();
+    showToast("Falha ao salvar: " + err.message);
+  }
+}
+
+async function handleDeleteAssessment(patientId, assessmentId) {
+  try {
+    await apiPost("deleteAssessment", { id: assessmentId });
+    state.assessments[patientId] = (state.assessments[patientId] || []).filter((a) => a.id !== assessmentId);
+    render();
+  } catch (err) {
+    showToast("Falha ao excluir avaliação: " + err.message);
+  }
+}
+
+/* =========================================================
+   UTILS
+   ========================================================= */
+
+function formatDate(d) {
+  if (!d) return "";
+  const parts = String(d).split(/[-T]/);
+  if (parts.length < 3) return d;
+  const [y, m, day] = parts;
+  return `${day}/${m}/${y}`;
+}
+
+function initials(name) {
+  return (name || "")
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase();
+}
+
+function escapeHtml(str) {
+  return String(str == null ? "" : str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+let toastTimeout = null;
+function showToast(msg) {
+  let el = document.getElementById("toast");
+  if (!el) {
+    el = document.createElement("div");
+    el.id = "toast";
+    el.className = "toast";
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  el.classList.remove("hidden");
+  if (toastTimeout) clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => el.classList.add("hidden"), 3000);
+}
+
+/* =========================================================
+   RENDERIZAÇÃO
+   ========================================================= */
+
+function render() {
+  const app = document.getElementById("app");
+
+  if (state.loading) {
+    app.innerHTML = `<div class="loading-state"><p>Carregando dados da clínica...</p></div>`;
+    return;
+  }
+
+  if (!API_URL || API_URL.indexOf("COLE_AQUI") !== -1) {
+    app.innerHTML = `
+      <div class="card">
+        <h2>Configuração pendente</h2>
+        <p style="margin-top:8px; font-size:14px; color:var(--text-secondary)">
+          Este app ainda não está conectado à planilha do Google Sheets.
+          Abra o arquivo <code>index.html</code> e substitua o valor de
+          <code>API_URL</code> pela URL do seu Apps Script
+          (veja o arquivo GUIA.md para instruções).
+        </p>
+      </div>`;
+    return;
+  }
+
+  if (!state.currentUser) {
+    app.innerHTML = renderAuth();
+    bindAuthEvents();
+    return;
+  }
+
+  let html = renderTopbar();
+
+  if (state.error) {
+    html += `<div class="error-banner">${escapeHtml(state.error)}</div>`;
+  }
+
+  if (state.view === "patients") {
+    html += renderPatientsView();
+  } else if (state.view === "patient-detail") {
+    html += renderPatientDetail();
+  } else if (state.view === "assessment-form") {
+    html += renderAssessmentForm();
+  }
+
+  app.innerHTML = html;
+  bindCommonEvents();
+
+  if (state.view === "patients") bindPatientsEvents();
+  if (state.view === "patient-detail") bindPatientDetailEvents();
+  if (state.view === "assessment-form") bindAssessmentFormEvents();
+}
+
+function renderTopbar() {
+  return `
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo-circle">+</div>
+        <div class="brand-text">
+          <h1>Avaliação fisioterapêutica</h1>
+          <p>Santa Casa de Misericórdia de São Paulo</p>
+        </div>
+      </div>
+      <div class="user-chip">
+        <span>${escapeHtml(state.currentUser.nome)}</span>
+        <button class="btn-sm" id="btn-logout">Sair</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderAuth() {
+  const isLogin = state.authMode === "login";
+  return `
+    <div class="auth-wrap">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+        <div class="logo-circle" style="width:44px; height:44px; font-size:20px;">+</div>
+        <div>
+          <h1 style="font-size:18px;">Avaliação fisioterapêutica</h1>
+          <p style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Santa Casa de Misericórdia de São Paulo</p>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button id="tab-login" class="${isLogin ? "tab-active" : ""}">Entrar</button>
+        <button id="tab-register" class="${!isLogin ? "tab-active" : ""}">Cadastrar</button>
+      </div>
+
+      <div id="auth-error" class="error-banner hidden"></div>
+
+      <div class="field">
+        <label class="field-label">Nome do fisioterapeuta</label>
+        <input type="text" id="auth-name" placeholder="Ex: Ana Pereira" />
+      </div>
+
+      ${!isLogin ? `
+      <div class="field">
+        <label class="field-label">Registro profissional (CREFITO)</label>
+        <input type="text" id="auth-crefito" placeholder="Ex: 123456-F" />
+      </div>` : ""}
+
+      <button id="btn-auth-submit" class="btn-primary btn-block">${isLogin ? "Entrar" : "Criar acesso"}</button>
+
+      ${state.therapists.length > 0 && isLogin ? `
+        <p style="font-size:12px; color:var(--text-tertiary); margin-top:16px;">
+          Profissionais cadastrados: ${escapeHtml(state.therapists.map((t) => t.nome).join(", "))}
+        </p>` : ""}
+    </div>
+  `;
+}
+
+function bindAuthEvents() {
+  document.getElementById("tab-login").addEventListener("click", () => {
+    state.authMode = "login";
+    render();
+  });
+  document.getElementById("tab-register").addEventListener("click", () => {
+    state.authMode = "register";
+    render();
+  });
+  document.getElementById("btn-auth-submit").addEventListener("click", () => {
+    const name = document.getElementById("auth-name").value;
+    const crefitoEl = document.getElementById("auth-crefito");
+    const crefito = crefitoEl ? crefitoEl.value : "";
+    handleAuthSubmit(name, crefito);
+  });
+}
+
+function bindCommonEvents() {
+  const logoutBtn = document.getElementById("btn-logout");
+  if (logoutBtn) logoutBtn.addEventListener("click", handleLogout);
+}
+
+/* ---------- PATIENTS VIEW ---------- */
+
+function renderPatientsView() {
+  const term = state.searchTerm.toLowerCase();
+  const filtered = state.patients
+    .filter((p) => p.nome.toLowerCase().includes(term))
+    .sort((a, b) => a.nome.localeCompare(b.nome));
+
+  let html = `
+    <div class="row" style="margin-bottom:12px;">
+      <input type="search" id="search-input" placeholder="Buscar paciente pelo nome..." value="${escapeHtml(state.searchTerm)}" />
+      <button id="btn-toggle-add" class="btn-primary" style="flex:0 0 auto; white-space:nowrap;">+ Paciente</button>
+    </div>
+    <div id="add-patient-card"></div>
+  `;
+
+  if (filtered.length === 0) {
+    html += `
+      <div class="empty-state">
+        <p>${state.searchTerm ? "Nenhum paciente encontrado." : 'Nenhum paciente cadastrado ainda. Use "+ Paciente" para começar.'}</p>
+      </div>`;
+  } else {
+    html += `<div id="patient-list">`;
+    filtered.forEach((p) => {
+      const list = state.assessments[p.id] || [];
+      const last = list[0];
+      html += `
+        <button class="patient-item" data-patient-id="${escapeHtml(p.id)}">
+          <div class="info">
+            <div class="avatar">${escapeHtml(initials(p.nome))}</div>
+            <div class="meta">
+              <p>${escapeHtml(p.nome)}</p>
+              <p>${p.nascimento ? "Nascimento: " + formatDate(p.nascimento) : "Sem data de nascimento"} · ${list.length > 0 ? list.length + " avaliação(ões)" : "sem avaliações"}</p>
+            </div>
+          </div>
+          <div class="right">${last ? "Última: " + formatDate(last.dados.data) : ""}</div>
+        </button>
+      `;
+    });
+    html += `</div>`;
+  }
+
+  return html;
+}
+
+function bindPatientsEvents() {
+  const searchInput = document.getElementById("search-input");
+  searchInput.addEventListener("input", (e) => {
+    state.searchTerm = e.target.value;
+    const cursorPos = e.target.selectionStart;
+    render();
+    const newInput = document.getElementById("search-input");
+    if (newInput) {
+      newInput.focus();
+      newInput.setSelectionRange(cursorPos, cursorPos);
+    }
+  });
+
+  document.getElementById("btn-toggle-add").addEventListener("click", () => {
+    const card = document.getElementById("add-patient-card");
+    if (card.innerHTML) {
+      card.innerHTML = "";
+      return;
+    }
+    card.innerHTML = `
+      <div class="card">
+        <h3>Cadastrar paciente</h3>
+        <div class="field" style="margin-top:10px;">
+          <label class="field-label">Nome completo</label>
+          <input type="text" id="new-patient-name" placeholder="Nome do paciente" />
+        </div>
+        <div class="row">
+          <div class="field">
+            <label class="field-label">Data de nascimento</label>
+            <input type="date" id="new-patient-birth" />
+          </div>
+          <div class="field">
+            <label class="field-label">Telefone</label>
+            <input type="tel" id="new-patient-phone" placeholder="(11) 90000-0000" />
+          </div>
+        </div>
+        <button id="btn-save-patient" class="btn-primary">Salvar paciente</button>
+      </div>
+    `;
+    document.getElementById("btn-save-patient").addEventListener("click", () => {
+      const nome = document.getElementById("new-patient-name").value;
+      const nascimento = document.getElementById("new-patient-birth").value;
+      const telefone = document.getElementById("new-patient-phone").value;
+      handleAddPatient(nome, nascimento, telefone);
+    });
+  });
+
+  document.querySelectorAll(".patient-item").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      state.selectedPatientId = btn.getAttribute("data-patient-id");
+      state.view = "patient-detail";
+      render();
+    });
+  });
+}
+
+/* ---------- PATIENT DETAIL ---------- */
+
+function renderPatientDetail() {
+  const patient = state.patients.find((p) => p.id === state.selectedPatientId);
+  if (!patient) return `<p>Paciente não encontrado.</p>`;
+
+  const list = state.assessments[patient.id] || [];
+
+  let html = `
+    <button class="btn-text" id="btn-back-patients">&larr; Voltar para pacientes</button>
+
+    <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin:10px 0 16px;">
+      <div>
+        <h2>${escapeHtml(patient.nome)}</h2>
+        <p style="font-size:13px; color:var(--text-secondary); margin-top:4px;">
+          ${patient.nascimento ? "Nascimento: " + formatDate(patient.nascimento) : "Sem data de nascimento"}
+          ${patient.telefone ? " · " + escapeHtml(patient.telefone) : ""}
+        </p>
+      </div>
+      <button id="btn-new-assessment" class="btn-primary" style="white-space:nowrap;">+ Avaliação</button>
+    </div>
+
+    <h3 style="margin-bottom:8px;">Histórico de avaliações</h3>
+  `;
+
+  if (list.length === 0) {
+    html += `<div class="empty-state"><p>Nenhuma avaliação registrada para este paciente.</p></div>`;
+  } else {
+    list.forEach((a) => {
+      const queixa = a.dados.queixaPrincipal || "";
+      const resumo = queixa.length > 60 ? queixa.slice(0, 60) + "..." : queixa;
+      html += `
+        <div class="assessment-item">
+          <div class="meta">
+            <p>${formatDate(a.dados.data)}</p>
+            <p>${a.dados.avaliador ? "Avaliador: " + escapeHtml(a.dados.avaliador) : ""}${resumo ? " · Queixa: " + escapeHtml(resumo) : ""}</p>
+          </div>
+          <div style="display:flex; gap:6px;">
+            <button class="btn-sm btn-icon" data-edit-assessment="${escapeHtml(a.id)}">Editar</button>
+            <button class="btn-sm btn-icon btn-danger" data-delete-assessment="${escapeHtml(a.id)}">Excluir</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  html += `
+    <div style="border-top:1px solid var(--border); padding-top:16px; margin-top:16px;">
+      <div id="delete-patient-zone">
+        <button class="btn-text btn-danger" id="btn-delete-patient">Excluir paciente</button>
+      </div>
+    </div>
+  `;
+
+  return html;
+}
+
+function bindPatientDetailEvents() {
+  document.getElementById("btn-back-patients").addEventListener("click", () => {
+    state.view = "patients";
+    state.selectedPatientId = null;
+    render();
+  });
+
+  document.getElementById("btn-new-assessment").addEventListener("click", () => {
+    startNewAssessment(state.selectedPatientId);
+  });
+
+  document.querySelectorAll("[data-edit-assessment]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-edit-assessment");
+      const list = state.assessments[state.selectedPatientId] || [];
+      const assessment = list.find((a) => a.id === id);
+      if (assessment) startEditAssessment(state.selectedPatientId, assessment);
+    });
+  });
+
+  document.querySelectorAll("[data-delete-assessment]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.getAttribute("data-delete-assessment");
+      if (confirm("Excluir esta avaliação? Esta ação não pode ser desfeita.")) {
+        handleDeleteAssessment(state.selectedPatientId, id);
+      }
+    });
+  });
+
+  document.getElementById("btn-delete-patient").addEventListener("click", () => {
+    const patient = state.patients.find((p) => p.id === state.selectedPatientId);
+    const zone = document.getElementById("delete-patient-zone");
+    zone.innerHTML = `
+      <p style="font-size:13px; margin-bottom:8px;">
+        Excluir ${escapeHtml(patient.nome)} e todas as suas avaliações? Esta ação não pode ser desfeita.
+      </p>
+      <button id="btn-confirm-delete-patient" class="btn-danger btn-sm" style="font-weight:600; margin-right:8px;">Confirmar exclusão</button>
+      <button id="btn-cancel-delete-patient" class="btn-sm">Cancelar</button>
+    `;
+    document.getElementById("btn-confirm-delete-patient").addEventListener("click", () => {
+      handleDeletePatient(state.selectedPatientId);
+    });
+    document.getElementById("btn-cancel-delete-patient").addEventListener("click", () => {
+      render();
+    });
+  });
+}
+
+/* ---------- ASSESSMENT FORM ---------- */
+
+function renderAssessmentForm() {
+  const patient = state.patients.find((p) => p.id === state.selectedPatientId);
+  const d = state.editingAssessment.dados;
+
+  const romRows = ROM_MOVEMENTS.map((m) => {
+    const vals = d.rom[m] || {};
+    return `
+      <tr>
+        <td>${escapeHtml(m)}</td>
+        <td><input type="text" data-rom="${escapeHtml(m)}" data-side="direito" value="${escapeHtml(vals.direito || "")}" /></td>
+        <td><input type="text" data-rom="${escapeHtml(m)}" data-side="esquerdo" value="${escapeHtml(vals.esquerdo || "")}" /></td>
+      </tr>
+    `;
+  }).join("");
+
+  const painChecks = PAIN_TYPES.map((tipo) => {
+    const checked = d.tipoDor.includes(tipo) ? "checked" : "";
+    return `<label><input type="checkbox" data-pain-type="${escapeHtml(tipo)}" ${checked}/> ${escapeHtml(tipo)}</label>`;
+  }).join("");
+
+  const saveLabel = state.saveStatus === "saving" ? "Salvando..." : "Salvar avaliação";
+
+  return `
+    <button class="btn-text" id="btn-cancel-form">&larr; Voltar sem salvar</button>
+
+    <h2 style="margin:10px 0 4px;">Avaliação fisioterapêutica</h2>
+    <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">
+      Paciente: <strong>${escapeHtml(patient ? patient.nome : "")}</strong>
+    </p>
+
+    <div class="card">
+      <h3>Identificação</h3>
+      <div class="row" style="margin-top:10px;">
+        <div class="field">
+          <label class="field-label">Data da avaliação</label>
+          <input type="date" data-field="data" value="${escapeHtml(d.data)}" />
+        </div>
+        <div class="field">
+          <label class="field-label">Avaliador(a) responsável</label>
+          <input type="text" data-field="avaliador" value="${escapeHtml(d.avaliador)}" />
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Queixa principal e história clínica</h3>
+      <div class="subtitle">≈ 5 min</div>
+      <div class="field"><label class="field-label">Queixa principal</label><textarea data-field="queixaPrincipal">${escapeHtml(d.queixaPrincipal)}</textarea></div>
+      <div class="field"><label class="field-label">Início dos sintomas (quando/como)</label><textarea data-field="inicioSintomas">${escapeHtml(d.inicioSintomas)}</textarea></div>
+      <div class="field"><label class="field-label">Evolução do quadro</label><textarea data-field="evolucaoQuadro">${escapeHtml(d.evolucaoQuadro)}</textarea></div>
+      <div class="field"><label class="field-label">Tratamentos anteriores</label><textarea data-field="tratamentosAnteriores">${escapeHtml(d.tratamentosAnteriores)}</textarea></div>
+      <div class="field"><label class="field-label">Hipótese diagnóstica / diagnóstico médico</label><textarea data-field="hipoteseDiagnostica">${escapeHtml(d.hipoteseDiagnostica)}</textarea></div>
+      <div class="field"><label class="field-label">Histórico médico relevante (cirurgias, doenças, medicamentos)</label><textarea data-field="historicoMedico">${escapeHtml(d.historicoMedico)}</textarea></div>
+      <div class="field"><label class="field-label">Hábitos de vida (atividade física, sono, trabalho)</label><textarea data-field="habitosVida">${escapeHtml(d.habitosVida)}</textarea></div>
+    </div>
+
+    <div class="card">
+      <h3>Avaliação da dor</h3>
+      <div class="subtitle">≈ 5 min</div>
+      <div class="field">
+        <label class="field-label">Escala Visual Analógica (EVA): <span id="eva-value">${d.evaNivel}</span> / 10</label>
+        <input type="range" min="0" max="10" step="1" value="${d.evaNivel}" id="eva-range" />
+        <div class="eva-scale"><span>0 = sem dor</span><span>10 = dor máxima</span></div>
+      </div>
+      <div class="field"><label class="field-label">Localização da dor</label><input type="text" data-field="localizacaoDor" value="${escapeHtml(d.localizacaoDor)}" /></div>
+      <div class="field">
+        <label class="field-label">Tipo de dor</label>
+        <div class="checkbox-grid">${painChecks}</div>
+        ${d.tipoDor.includes("Outro") ? `<div style="margin-top:8px;"><input type="text" data-field="tipoDorOutro" placeholder="Especificar outro tipo de dor" value="${escapeHtml(d.tipoDorOutro)}" /></div>` : ""}
+      </div>
+      <div class="row">
+        <div class="field"><label class="field-label">Fatores de melhora</label><input type="text" data-field="fatoresMelhora" value="${escapeHtml(d.fatoresMelhora)}" /></div>
+        <div class="field"><label class="field-label">Fatores de piora</label><input type="text" data-field="fatoresPiora" value="${escapeHtml(d.fatoresPiora)}" /></div>
+      </div>
+      <div class="field"><label class="field-label">Frequência (constante / intermitente)</label><input type="text" data-field="frequenciaDor" value="${escapeHtml(d.frequenciaDor)}" /></div>
+    </div>
+
+    <div class="card">
+      <h3>Inspeção e palpação</h3>
+      <div class="subtitle">≈ 5 min</div>
+      <div class="field"><label class="field-label">Postura estática (observação geral)</label><textarea data-field="posturaEstatica">${escapeHtml(d.posturaEstatica)}</textarea></div>
+      <div class="field"><label class="field-label">Alterações visíveis (edema, deformidades, atrofias)</label><textarea data-field="alteracoesVisiveis">${escapeHtml(d.alteracoesVisiveis)}</textarea></div>
+      <div class="field"><label class="field-label">Palpação (pontos dolorosos, tensão muscular, temperatura)</label><textarea data-field="palpacao">${escapeHtml(d.palpacao)}</textarea></div>
+      <div class="field"><label class="field-label">Cicatrizes / lesões cutâneas</label><input type="text" data-field="cicatrizes" value="${escapeHtml(d.cicatrizes)}" /></div>
+    </div>
+
+    <div class="card">
+      <h3>Amplitude de movimento — ADM</h3>
+      <div class="subtitle">≈ 10 min · Registrar em graus (°) ou classificar como Normal (N) / Limitada (L) / Dolorosa (D)</div>
+      <div style="overflow-x:auto;">
+        <table class="rom">
+          <thead><tr><th>Articulação / Movimento</th><th style="width:90px;">Direito</th><th style="width:90px;">Esquerdo</th></tr></thead>
+          <tbody>${romRows}</tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Testes especiais e avaliação funcional</h3>
+      <div class="subtitle">≈ 3 min</div>
+      <div class="field"><label class="field-label">Testes especiais aplicados (nome e resultado)</label><textarea data-field="testesEspeciais" rows="3">${escapeHtml(d.testesEspeciais)}</textarea></div>
+      <div class="field"><label class="field-label">Marcha (padrão, simetria, uso de dispositivos auxiliares)</label><textarea data-field="marcha">${escapeHtml(d.marcha)}</textarea></div>
+      <div class="field"><label class="field-label">Equilíbrio (estático e dinâmico)</label><input type="text" data-field="equilibrio" value="${escapeHtml(d.equilibrio)}" /></div>
+      <div class="field"><label class="field-label">Transferências e mobilidade funcional</label><textarea data-field="transferencias">${escapeHtml(d.transferencias)}</textarea></div>
+      <div class="field"><label class="field-label">Sensibilidade (tátil, dolorosa, proprioceptiva)</label><input type="text" data-field="sensibilidade" value="${escapeHtml(d.sensibilidade)}" /></div>
+    </div>
+
+    <div class="card">
+      <h3>Impacto nas atividades de vida diária — AVDs</h3>
+      <div class="subtitle">≈ 2 min</div>
+      <div class="field"><label class="field-label">Atividades comprometidas</label><input type="text" data-field="atividadesComprometidas" value="${escapeHtml(d.atividadesComprometidas)}" /></div>
+      <div class="field">
+        <label class="field-label">Nível de independência</label>
+        <select data-field="nivelIndependencia">
+          <option value="" ${d.nivelIndependencia === "" ? "selected" : ""}>Selecionar...</option>
+          <option value="Independente" ${d.nivelIndependencia === "Independente" ? "selected" : ""}>Independente</option>
+          <option value="Assistência parcial" ${d.nivelIndependencia === "Assistência parcial" ? "selected" : ""}>Assistência parcial</option>
+          <option value="Dependente" ${d.nivelIndependencia === "Dependente" ? "selected" : ""}>Dependente</option>
+        </select>
+      </div>
+      <div class="field"><label class="field-label">Objetivos do paciente com o tratamento</label><input type="text" data-field="objetivosPaciente" value="${escapeHtml(d.objetivosPaciente)}" /></div>
+    </div>
+
+    <div class="card">
+      <h3>Diagnóstico fisioterapêutico e plano de tratamento</h3>
+      <div class="field" style="margin-top:10px;"><label class="field-label">Diagnóstico fisioterapêutico (CIF / hipótese)</label><input type="text" data-field="diagnosticoFisio" value="${escapeHtml(d.diagnosticoFisio)}" /></div>
+      <div class="field"><label class="field-label">Objetivos do tratamento (curto e longo prazo)</label><textarea data-field="objetivosTratamento">${escapeHtml(d.objetivosTratamento)}</textarea></div>
+      <div class="field"><label class="field-label">Conduta proposta / plano terapêutico</label><textarea data-field="condutaProposta">${escapeHtml(d.condutaProposta)}</textarea></div>
+      <div class="row">
+        <div class="field"><label class="field-label">Frequência e número de sessões previstas</label><input type="text" data-field="frequenciaSessoes" value="${escapeHtml(d.frequenciaSessoes)}" /></div>
+        <div class="field"><label class="field-label">Reavaliação prevista para</label><input type="date" data-field="reavaliacaoPara" value="${escapeHtml(d.reavaliacaoPara)}" /></div>
+      </div>
+      <div class="field"><label class="field-label">Fisioterapeuta responsável</label><input type="text" data-field="fisioterapeutaResponsavel" value="${escapeHtml(d.fisioterapeutaResponsavel)}" /></div>
+    </div>
+
+    <div class="footer-actions">
+      <button id="btn-cancel-form-2">Cancelar</button>
+      <button id="btn-save-assessment" class="btn-primary" ${state.saveStatus === "saving" ? "disabled" : ""}>${saveLabel}</button>
+    </div>
+  `;
+}
+
+function bindAssessmentFormEvents() {
+  const d = state.editingAssessment.dados;
+
+  function backWithoutSaving() {
+    state.view = "patient-detail";
+    state.editingAssessment = null;
+    render();
+  }
+
+  document.getElementById("btn-cancel-form").addEventListener("click", backWithoutSaving);
+  document.getElementById("btn-cancel-form-2").addEventListener("click", backWithoutSaving);
+
+  document.querySelectorAll("[data-field]").forEach((el) => {
+    const field = el.getAttribute("data-field");
+    const eventType = (el.tagName === "SELECT" || el.type === "date") ? "change" : "input";
+    el.addEventListener(eventType, (e) => {
+      d[field] = e.target.value;
+      if (field === "tipoDor") return;
+      // Para inputs de texto/textarea, evitamos re-render completo (perderia o foco);
+      // apenas atualizamos o estado em memória.
+      if (field === "nivelIndependencia") {
+        render();
+      }
+    });
+  });
+
+  document.getElementById("eva-range").addEventListener("input", (e) => {
+    d.evaNivel = Number(e.target.value);
+    document.getElementById("eva-value").textContent = d.evaNivel;
+  });
+
+  document.querySelectorAll("[data-pain-type]").forEach((el) => {
+    el.addEventListener("change", () => {
+      const tipo = el.getAttribute("data-pain-type");
+      const idx = d.tipoDor.indexOf(tipo);
+      if (el.checked && idx === -1) d.tipoDor.push(tipo);
+      if (!el.checked && idx !== -1) d.tipoDor.splice(idx, 1);
+      render();
+    });
+  });
+
+  document.querySelectorAll("[data-rom]").forEach((el) => {
+    el.addEventListener("input", (e) => {
+      const movement = el.getAttribute("data-rom");
+      const side = el.getAttribute("data-side");
+      if (!d.rom[movement]) d.rom[movement] = {};
+      d.rom[movement][side] = e.target.value;
+    });
+  });
+
+  document.getElementById("btn-save-assessment").addEventListener("click", handleSaveAssessment);
+}
+
+/* =========================================================
+   INICIALIZAÇÃO
+   ========================================================= */
+
+loadAll();
+</script>
+</body>
+</html>
