@@ -21,9 +21,9 @@
     --radius-md: 8px;
     --radius-lg: 12px;
   }
- 
+
   * { box-sizing: border-box; }
- 
+
   html, body {
     margin: 0;
     padding: 0;
@@ -32,21 +32,21 @@
     color: var(--text);
     -webkit-tap-highlight-color: transparent;
   }
- 
+
   #app {
     max-width: 720px;
     margin: 0 auto;
     padding: 16px;
     padding-bottom: 80px;
   }
- 
+
   h1, h2, h3 { font-weight: 600; line-height: 1.3; margin: 0; }
   h1 { font-size: 18px; }
   h2 { font-size: 17px; }
   h3 { font-size: 15px; color: var(--primary); }
- 
+
   p { margin: 0; line-height: 1.5; }
- 
+
   /* TOP BAR */
   .topbar {
     display: flex;
@@ -67,13 +67,13 @@
     flex-shrink: 0;
     font-weight: 700; color: var(--primary); font-size: 16px;
   }
- 
+
   .user-chip {
     display: flex; align-items: center; gap: 8px;
     font-size: 13px; color: var(--text-secondary);
     flex-shrink: 0;
   }
- 
+
   /* BUTTONS */
   button, .btn {
     font-family: inherit;
@@ -104,7 +104,7 @@
   .btn-block { width: 100%; }
   .btn-sm { font-size: 13px; padding: 6px 10px; }
   .btn-icon { padding: 6px 10px; }
- 
+
   /* CARDS / SECTIONS */
   .card {
     background: var(--surface);
@@ -115,7 +115,7 @@
   }
   .card h3 { margin-bottom: 4px; }
   .card .subtitle { font-size: 12px; color: var(--text-tertiary); margin-bottom: 10px; }
- 
+
   /* FORM ELEMENTS */
   label.field-label {
     display: block;
@@ -143,7 +143,7 @@
   .row > * { flex: 1; min-width: 0; }
   .checkbox-grid { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 4px; }
   .checkbox-grid label { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 400; color: var(--text); }
- 
+
   /* PATIENT LIST */
   .patient-item {
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
@@ -160,7 +160,7 @@
   .patient-item .meta p:first-child { font-size: 14px; font-weight: 600; }
   .patient-item .meta p:last-child { font-size: 12px; color: var(--text-tertiary); }
   .patient-item .right { font-size: 12px; color: var(--text-tertiary); text-align: right; flex-shrink: 0; white-space: nowrap; }
- 
+
   .assessment-item {
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
     padding: 12px 14px; margin-bottom: 8px;
@@ -168,22 +168,22 @@
   }
   .assessment-item .meta p:first-child { font-size: 14px; font-weight: 600; }
   .assessment-item .meta p:last-child { font-size: 12px; color: var(--text-tertiary); margin-top: 2px; }
- 
+
   .empty-state { text-align: center; padding: 32px 16px; color: var(--text-tertiary); }
   .empty-state p { font-size: 14px; margin-top: 6px; }
- 
+
   /* TABLE (ROM) */
   table.rom { width: 100%; font-size: 13px; border-collapse: collapse; }
   table.rom th { text-align: left; padding: 6px 6px; font-weight: 600; background: var(--bg); }
   table.rom td { padding: 4px 6px; border-top: 1px solid var(--border); }
   table.rom input { font-size: 13px; padding: 6px 8px; }
- 
+
   /* AUTH SCREEN */
   .auth-wrap { max-width: 360px; margin: 40px auto 0; }
   .tabs { display: flex; gap: 8px; margin-bottom: 16px; }
   .tabs button { flex: 1; }
   .tab-active { background: var(--primary-light); border-color: var(--primary-light); font-weight: 600; color: var(--primary); }
- 
+
   .error-banner {
     background: #FBEAEA; color: var(--danger);
     padding: 10px 12px; border-radius: var(--radius-md);
@@ -195,20 +195,20 @@
     border-radius: var(--radius-md); font-size: 13px; z-index: 100;
     box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   }
- 
+
   .footer-actions {
     display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px;
   }
- 
+
   .eva-scale {
     display: flex; justify-content: space-between; font-size: 12px; color: var(--text-tertiary);
     margin-top: 4px;
   }
- 
+
   .loading-state {
     text-align: center; padding: 60px 16px; color: var(--text-secondary);
   }
- 
+
   .hidden { display: none !important; }
 </style>
 </head>
@@ -218,16 +218,16 @@
     <p>Carregando dados da clínica...</p>
   </div>
 </div>
- 
+
 <script>
 /* =========================================================
    CONFIGURAÇÃO
    ========================================================= */
- 
+
 // Cole aqui a URL do seu "App da Web" do Google Apps Script
 // (terminando em /exec). Veja o GUIA.md para instruções.
-const API_URL = "https://script.google.com/macros/s/AKfycbycR__AwD4Yb-gLM95NK8MkVJhK-hiI64HltNia5IR9b2GDCcBgJKemMSYwRSbzjlJv/exec";
- 
+const API_URL = "https://script.google.com/macros/s/AKfycbxYG0OcuODx549iXXud0wyoeZYRc6gOeJ-Bl5JrajPCPB6WtX-HeT8rsHQ-iwAlT1KE1g/exec";
+
 const ROM_MOVEMENTS = [
   "Quadril - Flexão",
   "Quadril - Extensão",
@@ -242,9 +242,9 @@ const ROM_MOVEMENTS = [
   "Tornozelo - Inversão",
   "Tornozelo - Eversão",
 ];
- 
+
 const PAIN_TYPES = ["Em pontada", "Em queimação", "Em peso", "Latejante", "Formigamento", "Outro"];
- 
+
 function emptyAssessment() {
   return {
     data: new Date().toISOString().slice(0, 10),
@@ -284,11 +284,11 @@ function emptyAssessment() {
     fisioterapeutaResponsavel: "",
   };
 }
- 
+
 /* =========================================================
    ESTADO GLOBAL
    ========================================================= */
- 
+
 const state = {
   loading: true,
   error: null,
@@ -303,11 +303,11 @@ const state = {
   searchTerm: "",
   saveStatus: "",
 };
- 
+
 /* =========================================================
    API HELPERS
    ========================================================= */
- 
+
 async function apiGet(params) {
   const url = API_URL + "?" + new URLSearchParams(params).toString();
   const res = await fetch(url);
@@ -315,7 +315,7 @@ async function apiGet(params) {
   if (!json.ok) throw new Error(json.error || "Erro desconhecido");
   return json.data;
 }
- 
+
 async function apiPost(action, payload) {
   const res = await fetch(API_URL, {
     method: "POST",
@@ -326,25 +326,25 @@ async function apiPost(action, payload) {
   if (!json.ok) throw new Error(json.error || "Erro desconhecido");
   return json.data;
 }
- 
+
 /* =========================================================
    CARREGAMENTO INICIAL
    ========================================================= */
- 
+
 async function loadAll() {
   state.loading = true;
   render();
   try {
     const data = await apiGet({ action: "listAll" });
- 
+
     state.therapists = (data.fisioterapeutas || []).map((t) => ({
       id: t.id, nome: t.nome, crefito: t.crefito,
     }));
- 
+
     state.patients = (data.pacientes || []).map((p) => ({
       id: p.id, nome: p.nome, nascimento: p.nascimento, telefone: p.telefone, criadoEm: p.criadoEm,
     }));
- 
+
     const assessmentsByPatient = {};
     (data.avaliacoes || []).forEach((a) => {
       let dados = {};
@@ -357,7 +357,7 @@ async function loadAll() {
       assessmentsByPatient[pid].sort((x, y) => (x.dados.data < y.dados.data ? 1 : -1));
     });
     state.assessments = assessmentsByPatient;
- 
+
     state.error = null;
   } catch (err) {
     state.error = "Não foi possível conectar à planilha. Verifique se o Apps Script foi publicado como 'Qualquer pessoa' e tente novamente. Detalhe: " + err.message;
@@ -366,11 +366,11 @@ async function loadAll() {
     render();
   }
 }
- 
+
 /* =========================================================
    AUTENTICAÇÃO
    ========================================================= */
- 
+
 async function handleAuthSubmit(name, crefito) {
   name = (name || "").trim();
   crefito = (crefito || "").trim();
@@ -378,7 +378,7 @@ async function handleAuthSubmit(name, crefito) {
     showAuthError("Informe seu nome.");
     return;
   }
- 
+
   if (state.authMode === "login") {
     const found = state.therapists.find((t) => t.nome.toLowerCase() === name.toLowerCase());
     if (!found) {
@@ -403,7 +403,7 @@ async function handleAuthSubmit(name, crefito) {
     }
   }
 }
- 
+
 function showAuthError(msg) {
   const el = document.getElementById("auth-error");
   if (el) {
@@ -411,7 +411,7 @@ function showAuthError(msg) {
     el.classList.remove("hidden");
   }
 }
- 
+
 function handleLogout() {
   state.currentUser = null;
   state.view = "patients";
@@ -419,11 +419,11 @@ function handleLogout() {
   state.editingAssessment = null;
   render();
 }
- 
+
 /* =========================================================
    PACIENTES
    ========================================================= */
- 
+
 async function handleAddPatient(nome, nascimento, telefone) {
   nome = (nome || "").trim();
   if (!nome) return;
@@ -437,7 +437,7 @@ async function handleAddPatient(nome, nascimento, telefone) {
     showToast("Falha ao cadastrar paciente: " + err.message);
   }
 }
- 
+
 async function handleDeletePatient(patientId) {
   try {
     await apiPost("deletePatient", { id: patientId });
@@ -450,11 +450,11 @@ async function handleDeletePatient(patientId) {
     showToast("Falha ao excluir paciente: " + err.message);
   }
 }
- 
+
 /* =========================================================
    AVALIAÇÕES
    ========================================================= */
- 
+
 function startNewAssessment(patientId) {
   const dados = emptyAssessment();
   dados.avaliador = state.currentUser ? state.currentUser.nome : "";
@@ -463,14 +463,14 @@ function startNewAssessment(patientId) {
   state.view = "assessment-form";
   render();
 }
- 
+
 function startEditAssessment(patientId, assessment) {
   const dados = Object.assign(emptyAssessment(), assessment.dados);
   state.editingAssessment = { id: assessment.id, pacienteId: patientId, dados: dados };
   state.view = "assessment-form";
   render();
 }
- 
+
 async function handleSaveAssessment() {
   const ea = state.editingAssessment;
   if (!ea) return;
@@ -494,7 +494,7 @@ async function handleSaveAssessment() {
     showToast("Falha ao salvar: " + err.message);
   }
 }
- 
+
 async function handleDeleteAssessment(patientId, assessmentId) {
   try {
     await apiPost("deleteAssessment", { id: assessmentId });
@@ -504,11 +504,11 @@ async function handleDeleteAssessment(patientId, assessmentId) {
     showToast("Falha ao excluir avaliação: " + err.message);
   }
 }
- 
+
 /* =========================================================
    UTILS
    ========================================================= */
- 
+
 function formatDate(d) {
   if (!d) return "";
   const parts = String(d).split(/[-T]/);
@@ -516,7 +516,7 @@ function formatDate(d) {
   const [y, m, day] = parts;
   return `${day}/${m}/${y}`;
 }
- 
+
 function initials(name) {
   return (name || "")
     .split(" ")
@@ -526,7 +526,7 @@ function initials(name) {
     .join("")
     .toUpperCase();
 }
- 
+
 function escapeHtml(str) {
   return String(str == null ? "" : str)
     .replace(/&/g, "&amp;")
@@ -534,7 +534,7 @@ function escapeHtml(str) {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 }
- 
+
 let toastTimeout = null;
 function showToast(msg) {
   let el = document.getElementById("toast");
@@ -549,19 +549,19 @@ function showToast(msg) {
   if (toastTimeout) clearTimeout(toastTimeout);
   toastTimeout = setTimeout(() => el.classList.add("hidden"), 3000);
 }
- 
+
 /* =========================================================
    RENDERIZAÇÃO
    ========================================================= */
- 
+
 function render() {
   const app = document.getElementById("app");
- 
+
   if (state.loading) {
     app.innerHTML = `<div class="loading-state"><p>Carregando dados da clínica...</p></div>`;
     return;
   }
- 
+
   if (!API_URL || API_URL.indexOf("COLE_AQUI") !== -1) {
     app.innerHTML = `
       <div class="card">
@@ -575,19 +575,19 @@ function render() {
       </div>`;
     return;
   }
- 
+
   if (!state.currentUser) {
     app.innerHTML = renderAuth();
     bindAuthEvents();
     return;
   }
- 
+
   let html = renderTopbar();
- 
+
   if (state.error) {
     html += `<div class="error-banner">${escapeHtml(state.error)}</div>`;
   }
- 
+
   if (state.view === "patients") {
     html += renderPatientsView();
   } else if (state.view === "patient-detail") {
@@ -595,15 +595,15 @@ function render() {
   } else if (state.view === "assessment-form") {
     html += renderAssessmentForm();
   }
- 
+
   app.innerHTML = html;
   bindCommonEvents();
- 
+
   if (state.view === "patients") bindPatientsEvents();
   if (state.view === "patient-detail") bindPatientDetailEvents();
   if (state.view === "assessment-form") bindAssessmentFormEvents();
 }
- 
+
 function renderTopbar() {
   return `
     <div class="topbar">
@@ -621,7 +621,7 @@ function renderTopbar() {
     </div>
   `;
 }
- 
+
 function renderAuth() {
   const isLogin = state.authMode === "login";
   return `
@@ -633,27 +633,27 @@ function renderAuth() {
           <p style="font-size:13px; color:var(--text-secondary); margin-top:2px;">Santa Casa de Misericórdia de São Paulo</p>
         </div>
       </div>
- 
+
       <div class="tabs">
         <button id="tab-login" class="${isLogin ? "tab-active" : ""}">Entrar</button>
         <button id="tab-register" class="${!isLogin ? "tab-active" : ""}">Cadastrar</button>
       </div>
- 
+
       <div id="auth-error" class="error-banner hidden"></div>
- 
+
       <div class="field">
         <label class="field-label">Nome do fisioterapeuta</label>
         <input type="text" id="auth-name" placeholder="Ex: Ana Pereira" />
       </div>
- 
+
       ${!isLogin ? `
       <div class="field">
         <label class="field-label">Registro profissional (CREFITO) — opcional</label>
         <input type="text" inputmode="numeric" id="auth-crefito" placeholder="Ex: 123456" />
       </div>` : ""}
- 
+
       <button id="btn-auth-submit" class="btn-primary btn-block">${isLogin ? "Entrar" : "Criar acesso"}</button>
- 
+
       ${state.therapists.length > 0 && isLogin ? `
         <p style="font-size:12px; color:var(--text-tertiary); margin-top:16px;">
           Profissionais cadastrados: ${escapeHtml(state.therapists.map((t) => t.nome).join(", "))}
@@ -661,7 +661,7 @@ function renderAuth() {
     </div>
   `;
 }
- 
+
 function bindAuthEvents() {
   document.getElementById("tab-login").addEventListener("click", () => {
     state.authMode = "login";
@@ -678,20 +678,20 @@ function bindAuthEvents() {
     handleAuthSubmit(name, crefito);
   });
 }
- 
+
 function bindCommonEvents() {
   const logoutBtn = document.getElementById("btn-logout");
   if (logoutBtn) logoutBtn.addEventListener("click", handleLogout);
 }
- 
+
 /* ---------- PATIENTS VIEW ---------- */
- 
+
 function renderPatientsView() {
   const term = state.searchTerm.toLowerCase();
   const filtered = state.patients
     .filter((p) => p.nome.toLowerCase().includes(term))
     .sort((a, b) => a.nome.localeCompare(b.nome));
- 
+
   let html = `
     <div class="row" style="margin-bottom:12px;">
       <input type="search" id="search-input" placeholder="Buscar paciente pelo nome..." value="${escapeHtml(state.searchTerm)}" />
@@ -699,7 +699,7 @@ function renderPatientsView() {
     </div>
     <div id="add-patient-card"></div>
   `;
- 
+
   if (filtered.length === 0) {
     html += `
       <div class="empty-state">
@@ -725,10 +725,10 @@ function renderPatientsView() {
     });
     html += `</div>`;
   }
- 
+
   return html;
 }
- 
+
 function bindPatientsEvents() {
   const searchInput = document.getElementById("search-input");
   searchInput.addEventListener("input", (e) => {
@@ -741,7 +741,7 @@ function bindPatientsEvents() {
       newInput.setSelectionRange(cursorPos, cursorPos);
     }
   });
- 
+
   document.getElementById("btn-toggle-add").addEventListener("click", () => {
     const card = document.getElementById("add-patient-card");
     if (card.innerHTML) {
@@ -775,7 +775,7 @@ function bindPatientsEvents() {
       handleAddPatient(nome, nascimento, telefone);
     });
   });
- 
+
   document.querySelectorAll(".patient-item").forEach((btn) => {
     btn.addEventListener("click", () => {
       state.selectedPatientId = btn.getAttribute("data-patient-id");
@@ -784,18 +784,18 @@ function bindPatientsEvents() {
     });
   });
 }
- 
+
 /* ---------- PATIENT DETAIL ---------- */
- 
+
 function renderPatientDetail() {
   const patient = state.patients.find((p) => p.id === state.selectedPatientId);
   if (!patient) return `<p>Paciente não encontrado.</p>`;
- 
+
   const list = state.assessments[patient.id] || [];
- 
+
   let html = `
     <button class="btn-text" id="btn-back-patients">&larr; Voltar para pacientes</button>
- 
+
     <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:12px; margin:10px 0 16px;">
       <div>
         <h2>${escapeHtml(patient.nome)}</h2>
@@ -806,10 +806,10 @@ function renderPatientDetail() {
       </div>
       <button id="btn-new-assessment" class="btn-primary" style="white-space:nowrap;">+ Avaliação</button>
     </div>
- 
+
     <h3 style="margin-bottom:8px;">Histórico de avaliações</h3>
   `;
- 
+
   if (list.length === 0) {
     html += `<div class="empty-state"><p>Nenhuma avaliação registrada para este paciente.</p></div>`;
   } else {
@@ -830,7 +830,7 @@ function renderPatientDetail() {
       `;
     });
   }
- 
+
   html += `
     <div style="border-top:1px solid var(--border); padding-top:16px; margin-top:16px;">
       <div id="delete-patient-zone">
@@ -838,21 +838,21 @@ function renderPatientDetail() {
       </div>
     </div>
   `;
- 
+
   return html;
 }
- 
+
 function bindPatientDetailEvents() {
   document.getElementById("btn-back-patients").addEventListener("click", () => {
     state.view = "patients";
     state.selectedPatientId = null;
     render();
   });
- 
+
   document.getElementById("btn-new-assessment").addEventListener("click", () => {
     startNewAssessment(state.selectedPatientId);
   });
- 
+
   document.querySelectorAll("[data-edit-assessment]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-edit-assessment");
@@ -861,7 +861,7 @@ function bindPatientDetailEvents() {
       if (assessment) startEditAssessment(state.selectedPatientId, assessment);
     });
   });
- 
+
   document.querySelectorAll("[data-delete-assessment]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const id = btn.getAttribute("data-delete-assessment");
@@ -870,7 +870,7 @@ function bindPatientDetailEvents() {
       }
     });
   });
- 
+
   document.getElementById("btn-delete-patient").addEventListener("click", () => {
     const patient = state.patients.find((p) => p.id === state.selectedPatientId);
     const zone = document.getElementById("delete-patient-zone");
@@ -889,13 +889,13 @@ function bindPatientDetailEvents() {
     });
   });
 }
- 
+
 /* ---------- ASSESSMENT FORM ---------- */
- 
+
 function renderAssessmentForm() {
   const patient = state.patients.find((p) => p.id === state.selectedPatientId);
   const d = state.editingAssessment.dados;
- 
+
   const romRows = ROM_MOVEMENTS.map((m) => {
     const vals = d.rom[m] || {};
     return `
@@ -906,22 +906,22 @@ function renderAssessmentForm() {
       </tr>
     `;
   }).join("");
- 
+
   const painChecks = PAIN_TYPES.map((tipo) => {
     const checked = d.tipoDor.includes(tipo) ? "checked" : "";
     return `<label><input type="checkbox" data-pain-type="${escapeHtml(tipo)}" ${checked}/> ${escapeHtml(tipo)}</label>`;
   }).join("");
- 
+
   const saveLabel = state.saveStatus === "saving" ? "Salvando..." : "Salvar avaliação";
- 
+
   return `
     <button class="btn-text" id="btn-cancel-form">&larr; Voltar sem salvar</button>
- 
+
     <h2 style="margin:10px 0 4px;">Avaliação fisioterapêutica</h2>
     <p style="font-size:13px; color:var(--text-secondary); margin-bottom:16px;">
       Paciente: <strong>${escapeHtml(patient ? patient.nome : "")}</strong>
     </p>
- 
+
     <div class="card">
       <h3>Identificação</h3>
       <div class="row" style="margin-top:10px;">
@@ -935,7 +935,7 @@ function renderAssessmentForm() {
         </div>
       </div>
     </div>
- 
+
     <div class="card">
       <h3>Queixa principal e história clínica</h3>
       <div class="subtitle">≈ 5 min</div>
@@ -947,7 +947,7 @@ function renderAssessmentForm() {
       <div class="field"><label class="field-label">Histórico médico relevante (cirurgias, doenças, medicamentos)</label><textarea data-field="historicoMedico">${escapeHtml(d.historicoMedico)}</textarea></div>
       <div class="field"><label class="field-label">Hábitos de vida (atividade física, sono, trabalho)</label><textarea data-field="habitosVida">${escapeHtml(d.habitosVida)}</textarea></div>
     </div>
- 
+
     <div class="card">
       <h3>Avaliação da dor</h3>
       <div class="subtitle">≈ 5 min</div>
@@ -968,7 +968,7 @@ function renderAssessmentForm() {
       </div>
       <div class="field"><label class="field-label">Frequência (constante / intermitente)</label><input type="text" data-field="frequenciaDor" value="${escapeHtml(d.frequenciaDor)}" /></div>
     </div>
- 
+
     <div class="card">
       <h3>Inspeção e palpação</h3>
       <div class="subtitle">≈ 5 min</div>
@@ -977,7 +977,7 @@ function renderAssessmentForm() {
       <div class="field"><label class="field-label">Palpação (pontos dolorosos, tensão muscular, temperatura)</label><textarea data-field="palpacao">${escapeHtml(d.palpacao)}</textarea></div>
       <div class="field"><label class="field-label">Cicatrizes / lesões cutâneas</label><input type="text" data-field="cicatrizes" value="${escapeHtml(d.cicatrizes)}" /></div>
     </div>
- 
+
     <div class="card">
       <h3>Amplitude de movimento — ADM</h3>
       <div class="subtitle">≈ 10 min · Registrar em graus (°) ou classificar como Normal (N) / Limitada (L) / Dolorosa (D)</div>
@@ -988,7 +988,7 @@ function renderAssessmentForm() {
         </table>
       </div>
     </div>
- 
+
     <div class="card">
       <h3>Testes especiais e avaliação funcional</h3>
       <div class="subtitle">≈ 3 min</div>
@@ -998,7 +998,7 @@ function renderAssessmentForm() {
       <div class="field"><label class="field-label">Transferências e mobilidade funcional</label><textarea data-field="transferencias">${escapeHtml(d.transferencias)}</textarea></div>
       <div class="field"><label class="field-label">Sensibilidade (tátil, dolorosa, proprioceptiva)</label><input type="text" data-field="sensibilidade" value="${escapeHtml(d.sensibilidade)}" /></div>
     </div>
- 
+
     <div class="card">
       <h3>Impacto nas atividades de vida diária — AVDs</h3>
       <div class="subtitle">≈ 2 min</div>
@@ -1014,7 +1014,7 @@ function renderAssessmentForm() {
       </div>
       <div class="field"><label class="field-label">Objetivos do paciente com o tratamento</label><input type="text" data-field="objetivosPaciente" value="${escapeHtml(d.objetivosPaciente)}" /></div>
     </div>
- 
+
     <div class="card">
       <h3>Diagnóstico fisioterapêutico e plano de tratamento</h3>
       <div class="field" style="margin-top:10px;"><label class="field-label">Diagnóstico fisioterapêutico (CIF / hipótese)</label><input type="text" data-field="diagnosticoFisio" value="${escapeHtml(d.diagnosticoFisio)}" /></div>
@@ -1026,26 +1026,26 @@ function renderAssessmentForm() {
       </div>
       <div class="field"><label class="field-label">Fisioterapeuta responsável</label><input type="text" data-field="fisioterapeutaResponsavel" value="${escapeHtml(d.fisioterapeutaResponsavel)}" /></div>
     </div>
- 
+
     <div class="footer-actions">
       <button id="btn-cancel-form-2">Cancelar</button>
       <button id="btn-save-assessment" class="btn-primary" ${state.saveStatus === "saving" ? "disabled" : ""}>${saveLabel}</button>
     </div>
   `;
 }
- 
+
 function bindAssessmentFormEvents() {
   const d = state.editingAssessment.dados;
- 
+
   function backWithoutSaving() {
     state.view = "patient-detail";
     state.editingAssessment = null;
     render();
   }
- 
+
   document.getElementById("btn-cancel-form").addEventListener("click", backWithoutSaving);
   document.getElementById("btn-cancel-form-2").addEventListener("click", backWithoutSaving);
- 
+
   document.querySelectorAll("[data-field]").forEach((el) => {
     const field = el.getAttribute("data-field");
     const eventType = (el.tagName === "SELECT" || el.type === "date") ? "change" : "input";
@@ -1059,12 +1059,12 @@ function bindAssessmentFormEvents() {
       }
     });
   });
- 
+
   document.getElementById("eva-range").addEventListener("input", (e) => {
     d.evaNivel = Number(e.target.value);
     document.getElementById("eva-value").textContent = d.evaNivel;
   });
- 
+
   document.querySelectorAll("[data-pain-type]").forEach((el) => {
     el.addEventListener("change", () => {
       const tipo = el.getAttribute("data-pain-type");
@@ -1074,7 +1074,7 @@ function bindAssessmentFormEvents() {
       render();
     });
   });
- 
+
   document.querySelectorAll("[data-rom]").forEach((el) => {
     el.addEventListener("input", (e) => {
       const movement = el.getAttribute("data-rom");
@@ -1083,16 +1083,15 @@ function bindAssessmentFormEvents() {
       d.rom[movement][side] = e.target.value;
     });
   });
- 
+
   document.getElementById("btn-save-assessment").addEventListener("click", handleSaveAssessment);
 }
- 
+
 /* =========================================================
    INICIALIZAÇÃO
    ========================================================= */
- 
+
 loadAll();
 </script>
 </body>
 </html>
- 
